@@ -2,6 +2,12 @@
 import com.controller.ActualizadorController;
 import com.view.MainWindowView;
 import com.view.VentanaBienvenidaView;
+import entity.App;
+import entity.AppPK;
+import entity.Mensajes;
+import entity.Twitter;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
 
 /*
@@ -15,7 +21,6 @@ import com.view.VentanaBienvenidaView;
  */
 public class Start {
     public static void main(String... args){
-        Thread hiloServer = new Thread(new ActualizadorController());
-        hiloServer.start();
+        EntityManager manejadorEntidades = Persistence.createEntityManagerFactory("probandojpa").createEntityManager();
     }
 }
