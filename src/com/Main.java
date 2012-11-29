@@ -3,6 +3,7 @@ package com;
 
 
 import com.controller.ActualizadorController;
+import com.controller.TrayIconController;
 import com.view.MainWindowView;
 import entity.App;
 import java.awt.AWTException;
@@ -39,7 +40,10 @@ public class Main {
             trayIcon.setImageAutoSize(true);
             ventana.setIconImage(icon);
         try {
+            trayIcon.addActionListener(new TrayIconController());
+            trayIcon.setToolTip("TwitterUpdater 2.0");
             SystemTray.getSystemTray().add(trayIcon);
+            
         } catch (AWTException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

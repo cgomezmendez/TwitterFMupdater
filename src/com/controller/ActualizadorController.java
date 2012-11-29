@@ -36,7 +36,7 @@ MensajesController mensajes = new MensajesController();
     @Override
     public void run() {
         while (true){
-            while (correr==true){
+            if (correr){
                 ArrayList resultados;
                 XmlModel xml = new XmlModel("NowOnAir.xml");
                 resultados = xml.obtenerInfo();
@@ -52,9 +52,7 @@ MensajesController mensajes = new MensajesController();
                twitter.actualizarEstado(actualizacionEstado); 
                System.out.println(estadoString);
             }
-            while (correr!=true){
-            
-            }
+            System.out.println("");
         }
     }
     
