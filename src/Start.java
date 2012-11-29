@@ -1,11 +1,7 @@
 
-import com.controller.ActualizadorController;
-import com.view.MainWindowView;
-import com.view.VentanaBienvenidaView;
-import entity.App;
-import entity.AppPK;
-import entity.Mensajes;
-import entity.Twitter;
+
+import entity.Prueba;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
@@ -21,6 +17,7 @@ import javax.persistence.Persistence;
  */
 public class Start {
     public static void main(String... args){
-        EntityManager manejadorEntidades = Persistence.createEntityManagerFactory("probandojpa").createEntityManager();
+        EntityManager manejadorEntidades = Persistence.createEntityManagerFactory("ActualizadorEmisoraTwitterPU").createEntityManager();
+        List resultList = manejadorEntidades.createNativeQuery("SELECT nombre FROM prueba nombre").getResultList();
     }
 }
