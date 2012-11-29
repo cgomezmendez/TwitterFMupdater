@@ -4,6 +4,7 @@
  */
 package com.controller;
 
+import com.Main;
 import com.model.TwitterModel;
 import com.model.XmlModel;
 import com.view.MainWindowView;
@@ -35,8 +36,10 @@ MensajesController mensajes = new MensajesController();
     }
     @Override
     public void run() {
+        boolean presentado = false;
+        AppController app = new AppController();
         while (true){
-            if (correr){
+            if (app.retornarEstado()==true){
                 ArrayList resultados;
                 XmlModel xml = new XmlModel("NowOnAir.xml");
                 resultados = xml.obtenerInfo();
@@ -50,9 +53,14 @@ MensajesController mensajes = new MensajesController();
                 String estadoString = mensajeAntesCancion+" "+tituloCancion+" "+mensajeAntesArtista+" "+nombreArtista+" "+mensajeFinal;
                 StatusUpdate actualizacionEstado = new StatusUpdate(estadoString); 
                twitter.actualizarEstado(actualizacionEstado); 
-               System.out.println(estadoString);
+               if (Main.getVentana().isVisible()==false & !presentado){
+                   presentado = true;
+                   Main.getTrayIcon().displayMessage("Info:", "Haga click en cualquier momento para volver a abrir la ventana,el programa se esta ejecutando en segundo plano", TrayIcon.MessageType.INFO);
+               }
+               if (presentado & Main.getVentana().isVisible()){
+                   presentado = false;
+               }
             }
-            System.out.println("");
         }
     }
     
