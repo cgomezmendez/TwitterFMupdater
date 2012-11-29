@@ -22,18 +22,19 @@ import twitter4j.StatusUpdate;
  * @author cgomezmendez
  */
 public class ActualizadorController implements Runnable{
+private static boolean correr = true;
 
+    public static boolean isCorrer() {
+        return correr;
+    }
+
+    public static void setCorrer(boolean aCorrer) {
+        correr = aCorrer;
+    }
     @Override
     public void run() {
-        try {
-            MainWindowView ventana = new MainWindowView();
-            Image icon = Toolkit.getDefaultToolkit().createImage("tray.png");
-            ventana.setVisible(true);
-            TrayIcon trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().createImage("tray.png"));
-            trayIcon.setImageAutoSize(true);
-            ventana.setIconImage(icon);
-            SystemTray.getSystemTray().add(trayIcon);
-            while (true){
+        while (true){
+            while (correr){
                 ArrayList resultados;
                 XmlModel xml = new XmlModel("NowOnAir.xml");
                 resultados = xml.obtenerInfo();
@@ -44,9 +45,8 @@ public class ActualizadorController implements Runnable{
                 String estadoString = mensaje+" "+tituloCancion+" "+nombreArtista;
                 StatusUpdate actualizacionEstado = new StatusUpdate(estadoString); 
                twitter.actualizarEstado(actualizacionEstado); 
+               System.out.println(estadoString);
             }
-        } catch (AWTException ex) {
-            Logger.getLogger(ActualizadorController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
