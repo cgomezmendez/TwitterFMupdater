@@ -18,6 +18,6 @@ import javax.persistence.Persistence;
 public class Start {
     public static void main(String... args){
         EntityManager manejadorEntidades = Persistence.createEntityManagerFactory("ActualizadorEmisoraTwitterPU").createEntityManager();
-        List resultList = manejadorEntidades.createNativeQuery("SELECT nombre FROM prueba nombre").getResultList();
+        List resultList = manejadorEntidades.createNativeQuery("SELECT id as ID FROM Prueba id",Prueba.class).getResultList();
     }
 }
