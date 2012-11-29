@@ -20,7 +20,6 @@ public class ManejadorXmlModel extends DefaultHandler{
     @Override
     public void startDocument() throws SAXException {
         super.startDocument();
-        System.out.println("inicio");
     }
 
     @Override

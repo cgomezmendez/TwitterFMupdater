@@ -6,7 +6,7 @@ package com.controller;
 
 import com.model.TwitterModel;
 import com.model.XmlModel;
-import com.view.ServerCorriendoView;
+import com.view.MainWindowView;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.SystemTray;
@@ -26,7 +26,7 @@ public class ActualizadorController implements Runnable{
     @Override
     public void run() {
         try {
-            ServerCorriendoView ventana = new ServerCorriendoView();
+            MainWindowView ventana = new MainWindowView();
             Image icon = Toolkit.getDefaultToolkit().createImage("tray.png");
             ventana.setVisible(true);
             TrayIcon trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().createImage("tray.png"));

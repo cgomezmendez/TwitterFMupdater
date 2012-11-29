@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Schedule System="Jazler">
+ <Event status="happening" startTime="22:28:28" eventType="song">
+    <Announcement Display="ahora suena:                                                                   @http://www.festiva957.com/@victorlemoine"/>
+  <Song title="cancion titulo">
+   <Artist name="nombre artista">
+   </Artist>
+    <Jazler ID="593"/>
+    <PlayLister ID=""/>
+    <Media runTime="00:02:42"/>
+    <Expire Time="22:31:10"/>
+  </Song>
+ </Event>
+</Schedule>
+
