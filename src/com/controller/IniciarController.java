@@ -14,7 +14,8 @@ public class IniciarController implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Main.getActualizador().setCorrer(true);
+        AppController app = new AppController();
+        app.guardarEstado(true);
         Main.getVentana().getjPanel5().setVisible(true);
         Main.getVentana().getjPanel6().setVisible(false);
     }

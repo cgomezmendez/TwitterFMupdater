@@ -14,7 +14,8 @@ public class DetenerController implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ActualizadorController.setCorrer(false);
+        AppController app = new AppController();
+        app.guardarEstado(false);
         Main.getVentana().getjPanel5().setVisible(false);
         Main.getVentana().getjPanel6().setVisible(true);
     }
