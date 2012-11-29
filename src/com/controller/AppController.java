@@ -52,4 +52,9 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         
     }
     
+    public boolean retornaPrimeraVez(){
+        App app = MANEJADORENTIDADES.find(App.class, 1);
+        return app.getEjecutado();
+    }
+    
 }

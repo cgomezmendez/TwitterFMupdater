@@ -4,6 +4,9 @@
  */
 package com.controller;
 
+import com.Main;
+import entity.App;
+import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +18,9 @@ public class StopMenuController implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        AppController app = new AppController();
+        app.guardarEstado(false);
+        Main.getTrayIcon().displayMessage("Info", "El programa se ha parado", TrayIcon.MessageType.INFO);
     }
     
 }

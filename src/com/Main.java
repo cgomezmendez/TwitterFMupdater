@@ -3,11 +3,15 @@ package com;
 
 
 import com.controller.ActualizadorController;
+import com.controller.AppController;
 import com.controller.CloseMenuController;
+import com.controller.StartMenuController;
+import com.controller.StopMenuController;
 import com.controller.TrayIconController;
 import com.view.MainWindowView;
 import entity.App;
 import java.awt.AWTException;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.MenuShortcut;
@@ -22,6 +26,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -43,7 +53,16 @@ public class Main {
     private static MainWindowView ventana;
     static  private TrayIcon trayIcon;
     public static void main(String... args){
-        ventana = new MainWindowView();
+                ventana = new MainWindowView();
+        AppController app = new AppController();
+        if (app.retornaPrimeraVez()==false){
+            JLabel bienvenida = new JLabel("Bienvenido a TwitterFMUpdater 2.0,presione OK para continuar", new ImageIcon("aveazul.png"), 0);
+            JOptionPane ventanita = new JOptionPane();
+            ventanita.setSize(400,400);
+            ventanita.showMessageDialog(ventana, bienvenida, "Bienvenido a TwitterFMUpdater 2.0", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException  | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
@@ -64,6 +83,8 @@ public class Main {
             MenuItem detener = new  MenuItem("Detener");
             MenuItem Iniciar = new MenuItem("Iniciar");
             MenuItem cerrar = new MenuItem("Cerrar");
+            detener.addActionListener(new StopMenuController());
+            Iniciar.addActionListener(new StartMenuController());
             cerrar.addActionListener(new CloseMenuController());
             PopupMenu menu = new PopupMenu("Menu");
             menu.insert(cerrar, 0);
