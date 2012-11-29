@@ -9,6 +9,9 @@ import java.awt.TrayIcon;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyEvent;
 import com.controller.DetenerController;
+import com.controller.GuardarMensajesController;
+import com.controller.IniciarController;
+import com.controller.SeleccionarArchivoController;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
@@ -110,7 +113,7 @@ public class MainWindowView extends javax.swing.JFrame {
                         .addGap(119, 119, 119)
                         .addComponent(jLabel8))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
+                        .addGap(187, 187, 187)
                         .addComponent(jButton3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -119,10 +122,12 @@ public class MainWindowView extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel8)
-                .addGap(43, 43, 43)
+                .addGap(32, 32, 32)
                 .addComponent(jButton3)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
+
+        jButton3.addActionListener(new IniciarController());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -214,6 +219,8 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addContainerGap(101, Short.MAX_VALUE))
         );
 
+        jButton2.addActionListener(new GuardarMensajesController());
+
         jTabbedPane2.addTab("Mensajes", jPanel4);
 
         jFileChooser1.setDialogType(javax.swing.JFileChooser.CUSTOM_DIALOG);
@@ -221,11 +228,6 @@ public class MainWindowView extends javax.swing.JFrame {
         jFileChooser1.setApproveButtonToolTipText("Selecciona el archivo xml que deseas que se use para actualizar el estado");
         jFileChooser1.setDialogTitle("Seleccionar xml");
         jFileChooser1.setFileFilter(new FileNameExtensionFilter("archivo xml", "xml"));
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("<html><p>Para seleccionar otro archivo xml personalizado busquelo haga doble click o en su defecto click en ok</p></html>");
 
@@ -249,6 +251,8 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jFileChooser1.addActionListener(new SeleccionarArchivoController());
 
         jTabbedPane2.addTab("Seleccionar archivo", jPanel1);
 
@@ -299,10 +303,6 @@ public class MainWindowView extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:

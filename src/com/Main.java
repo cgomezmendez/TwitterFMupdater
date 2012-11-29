@@ -27,10 +27,12 @@ import javax.persistence.Persistence;
  * @author cgomezmendez
  */
 public class Main {
+    private static ActualizadorController actualizador;
     private static MainWindowView ventana;
     public static void main(String... args){
             ventana = new MainWindowView();
-            Thread hiloActualizador = new Thread(new ActualizadorController());
+            actualizador = new ActualizadorController();
+            Thread hiloActualizador = new Thread(actualizador);
             Image icon = Toolkit.getDefaultToolkit().createImage("tray.png");
             ventana.setVisible(true);
             TrayIcon trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().createImage("tray.png"));
@@ -52,5 +54,13 @@ public class Main {
 
     public static void setVentana(MainWindowView aVentana) {
         ventana = aVentana;
+    }
+
+    public static ActualizadorController getActualizador() {
+        return actualizador;
+    }
+
+    public static void setActualizador(ActualizadorController aActualizador) {
+        actualizador = aActualizador;
     }
 }

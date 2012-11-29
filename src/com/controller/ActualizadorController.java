@@ -13,6 +13,7 @@ import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import twitter4j.StatusUpdate;
@@ -23,6 +24,7 @@ import twitter4j.StatusUpdate;
  */
 public class ActualizadorController implements Runnable{
 private static boolean correr = true;
+MensajesController mensajes = new MensajesController();
 
     public static boolean isCorrer() {
         return correr;
@@ -34,18 +36,24 @@ private static boolean correr = true;
     @Override
     public void run() {
         while (true){
-            while (correr){
+            while (correr==true){
                 ArrayList resultados;
                 XmlModel xml = new XmlModel("NowOnAir.xml");
                 resultados = xml.obtenerInfo();
                 String tituloCancion =(String) resultados.get(0);
                 String nombreArtista =(String) resultados.get(1);
-                String mensaje =  "ahora suena";
                 TwitterModel twitter = new TwitterModel();
-                String estadoString = mensaje+" "+tituloCancion+" "+nombreArtista;
+                List<String> mensajesObtenidos = mensajes.obtenerDesdeBD();
+                String mensajeAntesCancion = mensajesObtenidos.get(1);
+                String mensajeAntesArtista = mensajesObtenidos.get(0);
+                String mensajeFinal = mensajesObtenidos.get(2);
+                String estadoString = mensajeAntesCancion+" "+tituloCancion+" "+mensajeAntesArtista+" "+nombreArtista+" "+mensajeFinal;
                 StatusUpdate actualizacionEstado = new StatusUpdate(estadoString); 
                twitter.actualizarEstado(actualizacionEstado); 
                System.out.println(estadoString);
+            }
+            while (correr!=true){
+            
             }
         }
     }

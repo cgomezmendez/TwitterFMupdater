@@ -5,6 +5,7 @@
 package com.controller;
 
 import entity.App;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -28,6 +29,11 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
 
     @Override
     public List<String> obtenerDesdeBD() {
+        App app = MANEJADORENTIDADES.find(App.class,1);
+        List<String> datos = new ArrayList<>();
+        String lugarArchivoXml = app.getXmlLocation();
+        datos.add(0,lugarArchivoXml);
+        return datos;
     }
     
 }
