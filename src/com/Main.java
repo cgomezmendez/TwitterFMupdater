@@ -60,6 +60,7 @@ public class Main {
             JOptionPane ventanita = new JOptionPane();
             ventanita.setSize(400,400);
             ventanita.showMessageDialog(ventana, bienvenida, "Bienvenido a TwitterFMUpdater 2.0", JOptionPane.INFORMATION_MESSAGE);
+            app.guardarPrimeraVez();
             
         }
 

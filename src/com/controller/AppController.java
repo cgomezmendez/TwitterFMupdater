@@ -57,4 +57,11 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         return app.getEjecutado();
     }
     
+    public void guardarPrimeraVez(){
+        App app = MANEJADORENTIDADES.find(App.class, 1);
+        MANEJADORENTIDADES.getTransaction().begin();
+        app.setEjecutado(Boolean.TRUE);
+        MANEJADORENTIDADES.getTransaction().commit();
+    }
+    
 }
