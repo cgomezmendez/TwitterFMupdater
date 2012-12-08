@@ -7,16 +7,9 @@ package com.controller;
 import com.Main;
 import com.model.TwitterModel;
 import com.model.XmlModel;
-import com.view.MainWindowView;
-import java.awt.AWTException;
-import java.awt.Image;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import twitter4j.StatusUpdate;
 
 /**
@@ -41,7 +34,8 @@ MensajesController mensajes = new MensajesController();
         while (true){
             if (app.retornarEstado()==true){
                 ArrayList resultados;
-                XmlModel xml = new XmlModel("NowOnAir.xml");
+                String rutaXML = new AppController().obtenerDesdeBD().get(0);
+                XmlModel xml = new XmlModel(rutaXML);
                 resultados = xml.obtenerInfo();
                 String tituloCancion =(String) resultados.get(0);
                 String nombreArtista =(String) resultados.get(1);

@@ -9,31 +9,18 @@ import com.controller.StartMenuController;
 import com.controller.StopMenuController;
 import com.controller.TrayIconController;
 import com.view.MainWindowView;
-import entity.App;
 import java.awt.AWTException;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MenuItem;
-import java.awt.MenuShortcut;
 import java.awt.PopupMenu;
-import java.awt.RenderingHints;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
-import java.awt.event.KeyEvent;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.LookAndFeel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -74,9 +61,9 @@ public class Main {
         }
             actualizador = new ActualizadorController();
             Thread hiloActualizador = new Thread(actualizador);
-            Image icon = Toolkit.getDefaultToolkit().createImage("tray.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png"));
             ventana.setVisible(true);
-            trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().createImage("tray.png"));
+            trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png")));
             trayIcon.setImageAutoSize(true);
             ventana.setIconImage(icon);
         try {

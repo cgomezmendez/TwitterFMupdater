@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -20,7 +19,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * @author cgomezmendez
  */
 public class XmlModel implements ImprimibleModel{
-    Logger logs = Logger.getLogger("Xml");
+    static final Logger logs = Logger.getLogger("Xml");
     String nombreArchivo;
     FileReader archivoXML;
     XMLReader lector;
@@ -48,9 +47,7 @@ public class XmlModel implements ImprimibleModel{
      }
         try {
             lector.parse(new InputSource(archivoXML));
-        } catch (IOException ex) {
-            
-        } catch (SAXException ex) {
+        } catch (IOException | SAXException ex) {
             
         }
         while (manejador.getResultado().size()<2){
