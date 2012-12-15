@@ -5,7 +5,6 @@
 package com.controller;
 
 import com.Main;
-import entity.App;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

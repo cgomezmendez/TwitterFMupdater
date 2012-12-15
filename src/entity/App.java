@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -45,8 +44,23 @@ public class App implements Serializable {
     @Column(name = "activo")
     private Boolean activo;
     @JoinColumn(name = "Twitter_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     private Twitter twitterid;
+    @Column(name = "segundosRetraso")
+    private int segundosRetraso;
+    @Column(name = "minutosRetraso")
+    private int minutosRetraso;
+    @Column(name = "preCancion")
+    private Boolean preCancion;
+    @Column(name = "cancion")
+    private Boolean cancion;
+    @Column(name = "preArtista")
+    private Boolean preArtista;
+    @Column(name = "artista")
+    private Boolean artista;
+    @Column(name = "ultimo")
+    private Boolean ultimo;
+    @Column(name = "Licencia")
+    private String idMaquina;
 
     public App() {
     }
@@ -93,6 +107,70 @@ public class App implements Serializable {
 
     public void setTwitterid(Twitter twitterid) {
         this.twitterid = twitterid;
+    }
+
+    public int getSegundosRetraso() {
+        return segundosRetraso;
+    }
+
+    public void setSegundosRetraso(int segundosRetraso) {
+        this.segundosRetraso = segundosRetraso;
+    }
+
+    public int getMinutosRetraso() {
+        return minutosRetraso;
+    }
+
+    public void setMinutosRetraso(int minutosRetraso) {
+        this.minutosRetraso = minutosRetraso;
+    }
+
+    public Boolean getPreCancion() {
+        return preCancion;
+    }
+
+    public void setPreCancion(Boolean preCancion) {
+        this.preCancion = preCancion;
+    }
+
+    public Boolean getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(Boolean cancion) {
+        this.cancion = cancion;
+    }
+
+    public Boolean getPreArtista() {
+        return preArtista;
+    }
+
+    public void setPreArtista(Boolean preArtista) {
+        this.preArtista = preArtista;
+    }
+
+    public Boolean getArtista() {
+        return artista;
+    }
+
+    public void setArtista(Boolean artista) {
+        this.artista = artista;
+    }
+
+    public Boolean getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(Boolean ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public String getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(String idMaquina) {
+        this.idMaquina = idMaquina;
     }
 
     @Override

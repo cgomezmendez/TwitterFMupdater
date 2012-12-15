@@ -8,7 +8,10 @@ import com.controller.CloseMenuController;
 import com.controller.StartMenuController;
 import com.controller.StopMenuController;
 import com.controller.TrayIconController;
+import com.controller.TwitterPrimeraConfController;
+import com.model.TwitterModel;
 import com.view.MainWindowView;
+import com.view.PrimeraConfiguracionView;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -16,13 +19,19 @@ import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
+import java.io.IOException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import twitter4j.StatusUpdate;
 
 
 /*
@@ -35,37 +44,64 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author cgomezmendez
  */
 public class Main {
-    
+    private static AppController app = new AppController();
     private static ActualizadorController actualizador;
     private static MainWindowView ventana;
     static  private TrayIcon trayIcon;
+    static private String macAdress = "";
+    static private boolean configuracionIsActiva;
+    static private TwitterModel twitter;
     public static void main(String... args){
-                ventana = new MainWindowView();
-        AppController app = new AppController();
+        try {
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            byte[] hardwareAddress = networkInterfaces.nextElement().getHardwareAddress();
+            StringBuilder constructorString = new StringBuilder();
+            for (int i = 0; i < hardwareAddress.length; i++) {
+                byte b = hardwareAddress[i];
+                constructorString.append(String.format("%02X%s", b, (i < hardwareAddress.length - 1) ? "-" : ""));
+                macAdress = macAdress.concat(Byte.toString(b));
+            }
+            System.out.println(constructorString.toString());
+        } catch (SocketException unknownHostException) {
+        }
+        try {
+            app.retornaPrimeraVez();
+        }
+        catch (NullPointerException e){
+            crearPrograma();
+        }
+        if (!AppController.getIdMaquina().equals(macAdress)){
+            crearPrograma();
+        }
         if (app.retornaPrimeraVez()==false){
             JLabel bienvenida = new JLabel("Bienvenido a TwitterFMUpdater 2.0,presione OK para continuar", new ImageIcon("aveazul.png"), 0);
             JOptionPane ventanita = new JOptionPane();
             ventanita.setSize(400,400);
-            ventanita.showMessageDialog(ventana, bienvenida, "Bienvenido a TwitterFMUpdater 2.0", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(ventana, bienvenida, "Bienvenido a TwitterFMUpdater 2.0", JOptionPane.INFORMATION_MESSAGE);
             app.guardarPrimeraVez();
             
         }
-
-        try {
+        ventana = new MainWindowView();
+        try{
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException  | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            try {UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());}
-            catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException a){
-                
-            }
+            SwingUtilities.updateComponentTreeUI(ventana);
+            ventana.pack();
         }
-            actualizador = new ActualizadorController();
-            Thread hiloActualizador = new Thread(actualizador);
-            Image icon = Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png"));
-            ventana.setVisible(true);
-            trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png")));
-            trayIcon.setImageAutoSize(true);
-            ventana.setIconImage(icon);
+        catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e){
+            System.out.println("problema look and feeel");
+        }
+        PrimerUsoAutentificacionTwitter();
+        System.out.println("casi empezando el hilo");
+        new AppController().guardarEstado(true);
+        Thread hiloActualizador = new Thread(actualizador);
+        hiloActualizador.start();
+        System.out.println("casi iniciado actualizador");
+        Image icon = Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png"));
+        ventana.setVisible(true);
+        trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png")));
+        trayIcon.setImageAutoSize(true);
+        ventana.setIconImage(icon);
+            
         try {
             trayIcon.addActionListener(new TrayIconController());
             MenuItem detener = new  MenuItem("Detener");
@@ -85,8 +121,6 @@ public class Main {
         } catch (AWTException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        hiloActualizador.start();
         
     }
 
@@ -112,5 +146,79 @@ public class Main {
 
     public static void setTrayIcon(TrayIcon aTrayIcon) {
         trayIcon = aTrayIcon;
+    }
+
+    public static AppController getApp() {
+        return app;
+    }
+
+    public static void setApp(AppController app) {
+        Main.app = app;
+    }
+
+    public static String getMacAdress() {
+        return macAdress;
+    }
+
+    public static void setMacAdress(String macAdress) {
+        Main.macAdress = macAdress;
+    }
+
+    public static boolean isConfiguracionIsActiva() {
+        return configuracionIsActiva;
+    }
+
+    public static void setConfiguracionIsActiva(boolean configuracionIsActiva) {
+        Main.configuracionIsActiva = configuracionIsActiva;
+    }
+    
+    public static void crearPrograma(){
+            boolean licenciaIsValida = false;
+            String licencia;
+            while (!licenciaIsValida){
+            licencia = JOptionPane.showInputDialog(null,"Introduzca Su Numero De Licencia","TwitterFMUpdater 2.0",JOptionPane.QUESTION_MESSAGE);
+            if (licencia.equals("UM3S5Y-PD530-RS04E-EY3DH")){
+                licenciaIsValida = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Licencia invalida","TwitterFMUpdater 2.0",JOptionPane.ERROR_MESSAGE);
+            }
+            }
+ 
+            app.crearAPP(macAdress);
+                   PrimeraConfiguracionView primeraConfiguracionView = new PrimeraConfiguracionView();
+                   primeraConfiguracionView.setVisible(true);
+                   configuracionIsActiva = true;
+                   while (configuracionIsActiva){
+                       System.out.println();
+                   }
+                   primeraConfiguracionView.setVisible(false);
+                       primeraConfiguracionView.dispose();
+
+    }
+    public static void PrimerUsoAutentificacionTwitter(){
+                TwitterPrimeraConfController controladorVentanaAutentificacion = new TwitterPrimeraConfController();
+        PrimeraConfiguracionView ventanaAutentificacion = new PrimeraConfiguracionView();
+        controladorVentanaAutentificacion.setVentana(ventanaAutentificacion);
+        ventanaAutentificacion.getGuardarTwitterPrimeraConf().addActionListener(controladorVentanaAutentificacion);
+        twitter = new TwitterModel();
+        controladorVentanaAutentificacion.setTwitter(twitter);
+        try {
+            ventanaAutentificacion.getNavegador().setPage(twitter.getPeticionToken().getAuthenticationURL());
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ventanaAutentificacion.setVisible(true);
+        int i;
+        while (twitter.isAutentificado()==false){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        actualizador = new ActualizadorController(twitter);
+        twitter.actualizarEstado(new StatusUpdate("hey"));
+        System.out.println("Testing");
     }
 }

@@ -15,7 +15,8 @@ import java.util.List;
  * @author cgomezmendez
  */
 public class GuardarMensajesController implements ActionListener{
-
+private int minutos;
+private int segundos;
     @Override
     public void actionPerformed(ActionEvent e) {
         String mensajeAntesCancion = Main.getVentana().getjTextField3().getText();
@@ -24,12 +25,24 @@ public class GuardarMensajesController implements ActionListener{
         Main.getVentana().getjTextField2().setText("");
         String mensajeFinal = Main.getVentana().getjTextField1().getText();
         Main.getVentana().getjTextField1().setText("");
-        List<String> mensajes = new ArrayList<String>();
+        List<String> mensajes = new ArrayList<>();
         mensajes.add(mensajeAntesCancion);
         mensajes.add(mensajeAntesArtista);
         mensajes.add(mensajeFinal);
         MensajesController mensajeControler = new MensajesController();
         mensajeControler.guardarEnDataBase(mensajes);
+        minutos = (int) Main.getVentana().getSpinerMinutos().getValue();
+        segundos = (int) Main.getVentana().getSpinerSegundos().getValue();
+        AppController app = new AppController();
+        app.guardarRetraso(minutos, segundos);
+        boolean[] checkboxes = new boolean[5];
+        checkboxes[0] = Main.getVentana().getPreCancionCheckBox().isSelected();
+        checkboxes[1] = Main.getVentana().getCancionCheckBox().isSelected();
+        checkboxes[2] = Main.getVentana().getCancionCheckBox().isSelected();
+        checkboxes[3] = Main.getVentana().getCancionCheckBox().isSelected();
+        checkboxes[4] = Main.getVentana().getCancionCheckBox().isSelected();
+        AppController.guardarCheckBoxMensajes(checkboxes);
+        
     }
     
 }
