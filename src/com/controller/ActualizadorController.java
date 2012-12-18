@@ -42,11 +42,9 @@ MensajesController mensajes = new MensajesController();
     public void run() {
         boolean presentado = false;
         AppController app = new AppController();
-        System.out.println("inicio actualizador");
         System.out.println(app.retornarEstado());
         while (true){
             if (app.retornarEstado()){
-                System.out.println("actualizando");
                 ArrayList resultados;
                 String rutaXML = new AppController().obtenerDesdeBD().get(0);
                 XmlModel xml = new XmlModel(rutaXML);

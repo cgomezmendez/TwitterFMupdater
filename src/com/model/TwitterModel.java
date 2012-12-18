@@ -3,6 +3,9 @@
  * 
  */
 package com.model;
+import com.controller.TwitterController;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import twitter4j.StatusUpdate;
@@ -34,14 +37,36 @@ public class TwitterModel {
         }
     }
     public void Loguearse(String pin){
+        if (!pin.equals("nada")) {
         try {
             tokenAcceso = twitter.getOAuthAccessToken(peticionToken, pin);
         } catch (TwitterException ex) {
             Logger.getLogger(TwitterModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        List<String> datos = new ArrayList<>();
+        datos.add(0,peticionToken.getToken());
+        datos.add(1,peticionToken.getTokenSecret());
+        TwitterController controlador = new TwitterController();
+        controlador.guardarEnDataBase(datos);
         autentificado = true;
-        System.out.println("autentificado");
+        System.out.println("coño");
+        }
+        
+        else {
+            TwitterController controlador = new TwitterController();
+            ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthAccessToken(controlador.obtenerDesdeBD().get(0))
+                .setOAuthAccessTokenSecret(controlador.obtenerDesdeBD().get(1))
+                .setOAuthConsumerKey("WHvCEQEbaBDcOKpX6itoIw")
+                .setOAuthConsumerSecret("sKMsMQs43H3vFL6V6fKxRvcL8u52EeJj2wiiBAcJSG0");
+                twitter = new TwitterFactory(cb.build()).getInstance();
+                System.out.println(controlador.obtenerDesdeBD().get(0)+"aqui");
+                
+        }
+        
     }
+
     public void actualizarEstado(StatusUpdate ultimoEstado ){
         try {
             twitter.updateStatus(ultimoEstado);

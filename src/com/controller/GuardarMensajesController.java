@@ -38,9 +38,9 @@ private int segundos;
         boolean[] checkboxes = new boolean[5];
         checkboxes[0] = Main.getVentana().getPreCancionCheckBox().isSelected();
         checkboxes[1] = Main.getVentana().getCancionCheckBox().isSelected();
-        checkboxes[2] = Main.getVentana().getCancionCheckBox().isSelected();
-        checkboxes[3] = Main.getVentana().getCancionCheckBox().isSelected();
-        checkboxes[4] = Main.getVentana().getCancionCheckBox().isSelected();
+        checkboxes[2] = Main.getVentana().getPreArtistaCheckBox().isSelected();
+        checkboxes[3] = Main.getVentana().getArtistaCheckBox().isSelected();
+        checkboxes[4] = Main.getVentana().getFinalCheckBox().isSelected();
         AppController.guardarCheckBoxMensajes(checkboxes);
         
     }

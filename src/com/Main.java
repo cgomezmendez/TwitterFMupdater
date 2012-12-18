@@ -20,9 +20,6 @@ import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.io.IOException;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -31,7 +28,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import twitter4j.StatusUpdate;
 
 
 /*
@@ -53,24 +49,9 @@ public class Main {
     static private TwitterModel twitter;
     public static void main(String... args){
         try {
-            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
-            byte[] hardwareAddress = networkInterfaces.nextElement().getHardwareAddress();
-            StringBuilder constructorString = new StringBuilder();
-            for (int i = 0; i < hardwareAddress.length; i++) {
-                byte b = hardwareAddress[i];
-                constructorString.append(String.format("%02X%s", b, (i < hardwareAddress.length - 1) ? "-" : ""));
-                macAdress = macAdress.concat(Byte.toString(b));
-            }
-            System.out.println(constructorString.toString());
-        } catch (SocketException unknownHostException) {
-        }
-        try {
             app.retornaPrimeraVez();
         }
         catch (NullPointerException e){
-            crearPrograma();
-        }
-        if (!AppController.getIdMaquina().equals(macAdress)){
             crearPrograma();
         }
         if (app.retornaPrimeraVez()==false){
@@ -91,11 +72,9 @@ public class Main {
             System.out.println("problema look and feeel");
         }
         PrimerUsoAutentificacionTwitter();
-        System.out.println("casi empezando el hilo");
         new AppController().guardarEstado(true);
         Thread hiloActualizador = new Thread(actualizador);
         hiloActualizador.start();
-        System.out.println("casi iniciado actualizador");
         Image icon = Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png"));
         ventana.setVisible(true);
         trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png")));
@@ -185,15 +164,7 @@ public class Main {
             }
             }
  
-            app.crearAPP(macAdress);
-                   PrimeraConfiguracionView primeraConfiguracionView = new PrimeraConfiguracionView();
-                   primeraConfiguracionView.setVisible(true);
-                   configuracionIsActiva = true;
-                   while (configuracionIsActiva){
-                       System.out.println();
-                   }
-                   primeraConfiguracionView.setVisible(false);
-                       primeraConfiguracionView.dispose();
+            app.crearAPP();
 
     }
     public static void PrimerUsoAutentificacionTwitter(){
@@ -218,7 +189,5 @@ public class Main {
             }
         }
         actualizador = new ActualizadorController(twitter);
-        twitter.actualizarEstado(new StatusUpdate("hey"));
-        System.out.println("Testing");
     }
 }

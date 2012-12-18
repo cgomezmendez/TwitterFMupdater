@@ -7,6 +7,7 @@ package com.controller;
 import entity.App;
 import entity.Mensajes;
 import entity.Twitter;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -66,7 +67,7 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         MANEJADORENTIDADES.getTransaction().commit();
     }
     
-    public void crearAPP(String idMaquina){
+    public void crearAPP(){
         MANEJADORENTIDADES.getTransaction().begin();
         Mensajes mensajes = new Mensajes(1);
         Twitter twitter = new Twitter(1);
@@ -83,12 +84,12 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         app.setPreArtista(Boolean.TRUE);
         app.setArtista(Boolean.TRUE);
         app.setUltimo(Boolean.TRUE);
-        app.setIdMaquina(idMaquina);
         mensajes.setMensajeInicial("ahora suena: ");
         mensajes.setMensajeArtista("");
         mensajes.setMensajeFinal("");
-        twitter.setPassword("");
-        twitter.setPassword("");
+        twitter.setPassword(null);
+        twitter.setPassword(null);
+        app.setXmlLocation("C:".concat(File.pathSeparator).concat("Jazler RadioStar 2").concat(File.pathSeparator).concat("Exports"));
         MANEJADORENTIDADES.getTransaction().commit();
     }
     
