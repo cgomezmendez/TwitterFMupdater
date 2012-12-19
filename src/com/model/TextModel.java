@@ -41,14 +41,17 @@ public class TextModel {
         } catch (IOException ex) {
             Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        info[0] = tituloYArtista.split("-",2)[0];
-        if (info.length==2){
-        info[1] = tituloYArtista.split("-",2)[1];
-        }
+        info[0] = tituloYArtista.split("\\+")[0];
         try {
             lector.close();
         } catch (IOException ex) {
             Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (tituloYArtista.split("\\+").length == 2){
+            info[1] = tituloYArtista.split("\\+")[1];
+        }
+        else {
+            info[1] = " ";
         }
         return info;
     }
@@ -57,9 +60,8 @@ public class TextModel {
         DateFormat formatoFecha = new SimpleDateFormat("yy-MM-dd");
         DateFormat formatoHora = new SimpleDateFormat("HH:mm");
         Date fecha = new Date();
-        System.out.println(formatoHora.format(fecha));
         String fechaHoy = formatoFecha.format(fecha);
-        String rutaArchivo = "C:".concat(File.separator.concat("Jazler RadioStar 2".concat(File.separator.concat("Logs".concat(File.separator.concat("Spots").concat(File.separator.concat(fechaHoy).concat(".txt")))))));
+        String rutaArchivo = "C:".concat(File.separator.concat("Jazler RadioStar 2".concat(File.separator.concat("Logs".concat(File.separator.concat("Jingles").concat(File.separator.concat(fechaHoy).concat(".txt")))))));
         archivo = new File(rutaArchivo);
         try {
             lector = new BufferedReader(new FileReader(archivo));
@@ -74,10 +76,14 @@ public class TextModel {
         } catch (IOException ex) {
             Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         if (promo.subSequence(0, 5).equals(formatoHora.format(fecha))){
-            String twit = promo.subSequence(9, promo.length()).toString();
-            twitter.actualizarEstado(new StatusUpdate(twit));
+            String jingle = promo.subSequence(9, promo.length()).toString();
+            String regex = "";
+            jingle = jingle.replace(" ( JINGLE )", "");
+            jingle = jingle.replace(" - ","");
+            StatusUpdate estado = new StatusUpdate(jingle);
+            twitter.actualizarEstado(estado);
+            
         }
     }
 }

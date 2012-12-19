@@ -61,6 +61,8 @@ public class App implements Serializable {
     private Boolean ultimo;
     @Column(name = "Licencia")
     private String idMaquina;
+    @Column(name = "jingles")
+    private Boolean jingles;
 
     public App() {
     }
@@ -171,6 +173,14 @@ public class App implements Serializable {
 
     public void setIdMaquina(String idMaquina) {
         this.idMaquina = idMaquina;
+    }
+
+    public Boolean getJingles() {
+        return jingles;
+    }
+
+    public void setJingles(Boolean jingles) {
+        this.jingles = jingles;
     }
 
     @Override

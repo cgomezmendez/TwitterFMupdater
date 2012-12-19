@@ -9,6 +9,7 @@ import com.controller.StartMenuController;
 import com.controller.StopMenuController;
 import com.controller.TrayIconController;
 import com.controller.TwitterPrimeraConfController;
+import com.model.TarjetaRedModel;
 import com.model.TwitterModel;
 import com.view.MainWindowView;
 import com.view.PrimeraConfiguracionView;

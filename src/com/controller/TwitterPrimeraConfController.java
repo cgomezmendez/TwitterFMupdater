@@ -39,7 +39,6 @@ public class TwitterPrimeraConfController implements ActionListener{
         twitter.Loguearse(ventana.getPin().getText());
         ventana.setVisible(false);
         new AppController().guardarEstado(true);
-        System.out.println("probando");
     }
     
 }

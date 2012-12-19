@@ -85,6 +85,7 @@ static EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         app.setPreArtista(Boolean.TRUE);
         app.setArtista(Boolean.TRUE);
         app.setUltimo(Boolean.TRUE);
+        app.setJingles(Boolean.FALSE);
         mensajes.setMensajeInicial("ahora suena: ");
         mensajes.setMensajeArtista("");
         mensajes.setMensajeFinal("");
@@ -147,5 +148,22 @@ static EntityManager manejadorEntidades = getMANEJADORENTIDADES();
     public static String getRutaArchivo(){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         return app.getXmlLocation();
+    }
+    
+    public static void guardarMiscelaneasCheckBoxJingles(boolean checkBox){
+        App app = MANEJADORENTIDADES.find(App.class, 1);
+        MANEJADORENTIDADES.getTransaction().begin();
+            app.setJingles(checkBox);
+        MANEJADORENTIDADES.getTransaction().commit();
+    }
+    public static boolean getMiscelaneasCheckBox(){
+        App app = MANEJADORENTIDADES.find(App.class, 1);
+        return app.getJingles();
+    }
+    public static void reiniciarPrimeraVez(){
+        App app = MANEJADORENTIDADES.find(App.class, 1);
+        MANEJADORENTIDADES.getTransaction().begin();
+        app.setEjecutado(Boolean.FALSE);
+        MANEJADORENTIDADES.getTransaction().commit();
     }
 }

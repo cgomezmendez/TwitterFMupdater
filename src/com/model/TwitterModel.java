@@ -27,8 +27,8 @@ public class TwitterModel {
     public TwitterModel() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthConsumerKey("QF1MyYWBYcViM1fZNVNqPQ")
-                .setOAuthConsumerSecret("sUDJeFWlEPnqXaiBA1x4rZyaUdJ267aw8FLW3qXYe7g");
+                .setOAuthConsumerKey("gCm2aAi4Jh2dxNCIPMiDZg")
+                .setOAuthConsumerSecret("P4FB6xA9h9eqqIqSVsaVNh5Mw8NdSbqjFLGGYydXWU");
 
         twitter = new TwitterFactory(cb.build()).getInstance();
         try {
@@ -58,8 +58,8 @@ public class TwitterModel {
         cb.setDebugEnabled(true)
                 .setOAuthAccessToken(TwitterController.obtenerDesdeBD().get(0))
                 .setOAuthAccessTokenSecret(TwitterController.obtenerDesdeBD().get(1))
-                .setOAuthConsumerKey("WHvCEQEbaBDcOKpX6itoIw")
-                .setOAuthConsumerSecret("sKMsMQs43H3vFL6V6fKxRvcL8u52EeJj2wiiBAcJSG0");
+                .setOAuthConsumerKey("gCm2aAi4Jh2dxNCIPMiDZg")
+                .setOAuthConsumerSecret("P4FB6xA9h9eqqIqSVsaVNh5Mw8NdSbqjFLGGYydXWU");
                 twitter = new TwitterFactory(cb.build()).getInstance();
                 
         }
@@ -69,7 +69,6 @@ public class TwitterModel {
     public void actualizarEstado(StatusUpdate ultimoEstado ){
         try {
             twitter.updateStatus(ultimoEstado);
-            TwitterController.guardarUltimoEstado(ultimoEstado.getStatus());
         } catch (TwitterException ex) {
             Logger.getLogger(TwitterModel.class.getName()).log(Level.SEVERE, null, ex);
         }

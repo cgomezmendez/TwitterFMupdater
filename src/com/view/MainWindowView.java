@@ -9,7 +9,9 @@ import com.controller.DetenerController;
 import com.controller.GuardarMensajesController;
 import com.controller.IniciarController;
 import com.controller.MensajeRapidoController;
+import com.controller.MiscelaneasController;
 import com.controller.SeleccionarArchivoController;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -70,6 +72,30 @@ public class MainWindowView extends javax.swing.JFrame {
         this.preCancionCheckBox = preCancionCheckBox;
     }
 
+    public JButton getAceptarBotonMiscelaneas() {
+        return aceptarBotonMiscelaneas;
+    }
+
+    public void setAceptarBotonMiscelaneas(JButton aceptarBotonMiscelaneas) {
+        this.aceptarBotonMiscelaneas = aceptarBotonMiscelaneas;
+    }
+
+    public JCheckBox getCheckBoxJingles() {
+        return checkBoxJingles;
+    }
+
+    public void setCheckBoxJingles(JCheckBox checkBoxJingles) {
+        this.checkBoxJingles = checkBoxJingles;
+    }
+
+    public JLabel getLabelMiscelaneas() {
+        return labelMiscelaneas;
+    }
+
+    public void setLabelMiscelaneas(JLabel labelMiscelaneas) {
+        this.labelMiscelaneas = labelMiscelaneas;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,13 +140,17 @@ public class MainWindowView extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         labelMensajeRapido = new javax.swing.JLabel();
         publicarMensajeRapido = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textBoxMensajeRapido = new javax.swing.JTextArea();
+        jPanel8 = new javax.swing.JPanel();
+        checkBoxJingles = new javax.swing.JCheckBox();
+        labelMiscelaneas = new javax.swing.JLabel();
+        aceptarBotonMiscelaneas = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         setTitle("TwitterFMUpdater 2.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -435,28 +465,6 @@ public class MainWindowView extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Mensajes", jPanel4);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/view/copyright.gif"))); // NOI18N
-        jLabel7.setText("<html><center><h1>&copy;Cristian Gomez 2012 todos los derechos reservados</h1></center></html>");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(206, 206, 206)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Acerca", jPanel2);
-
         labelMensajeRapido.setText("<html><p>Aqui podra postear mensajes rapidos en Twiter,solo tendra que escribir y darle a twitear</p></html>");
 
         publicarMensajeRapido.setText("Twittear");
@@ -494,6 +502,67 @@ public class MainWindowView extends javax.swing.JFrame {
         publicarMensajeRapido.addActionListener(new MensajeRapidoController(this));
 
         jTabbedPane2.addTab("Mensaje Rapido", jPanel7);
+
+        checkBoxJingles.setText("Activar publicaciones de jingles");
+        checkBoxJingles.setSelected(AppController.getMiscelaneasCheckBox());
+
+        labelMiscelaneas.setText("Aquí algunas opciones avanzadas que se añadieron a pedido:");
+
+        aceptarBotonMiscelaneas.setText("Aceptar");
+        aceptarBotonMiscelaneas.addActionListener(new MiscelaneasController(this));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap(209, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(labelMiscelaneas)
+                        .addGap(159, 159, 159))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(checkBoxJingles)
+                        .addGap(261, 261, 261))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(aceptarBotonMiscelaneas)
+                        .addGap(359, 359, 359))))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelMiscelaneas)
+                .addGap(34, 34, 34)
+                .addComponent(checkBoxJingles)
+                .addGap(18, 18, 18)
+                .addComponent(aceptarBotonMiscelaneas)
+                .addContainerGap(401, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("MIscelaneas", jPanel8);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/view/copyright.gif"))); // NOI18N
+        jLabel7.setText("<html><center><h1>&copy;Cristian Gomez 2012 todos los derechos reservados</h1></center></html>");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(252, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Acerca", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -567,7 +636,9 @@ public class MainWindowView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ArtistaCheckBox;
     private javax.swing.JCheckBox FinalCheckBox;
+    private javax.swing.JButton aceptarBotonMiscelaneas;
     private javax.swing.JCheckBox cancionCheckBox;
+    private javax.swing.JCheckBox checkBoxJingles;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -594,6 +665,7 @@ public class MainWindowView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -601,6 +673,7 @@ public class MainWindowView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel labelMensajeRapido;
+    private javax.swing.JLabel labelMiscelaneas;
     private javax.swing.JCheckBox preArtistaCheckBox;
     private javax.swing.JCheckBox preCancionCheckBox;
     private javax.swing.JButton publicarMensajeRapido;

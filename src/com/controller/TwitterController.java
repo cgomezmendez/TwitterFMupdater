@@ -33,7 +33,9 @@ public class TwitterController implements EntidadInterfaceController{
     
     public static void guardarUltimoEstado(String ultimoEstado){
         Twitter twitter = MANEJADORENTIDADES.find(Twitter.class, 1);
+        MANEJADORENTIDADES.getTransaction().begin();
         twitter.setUltimoTweet(ultimoEstado);
+        MANEJADORENTIDADES.getTransaction().commit();
     }
     
     public static String obtenerUltimoEstado(){

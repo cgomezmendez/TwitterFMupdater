@@ -42,7 +42,6 @@ MensajesController mensajes = new MensajesController();
     @Override
     public void run() {
         boolean presentado = false;
-        System.out.println(AppController.retornarEstado());
         while (true){
             if (AppController.retornarEstado()){
                 ArrayList resultados;
@@ -50,7 +49,9 @@ MensajesController mensajes = new MensajesController();
                 String tituloCancion = "";
                 String nombreArtista = "";
                 if (AppController.getRutaArchivo().contains("xml")){
+                    if (AppController.getMiscelaneasCheckBox()){
                 TextModel.postearPromo(twitter);
+                    }
                 xml = new XmlModel(rutaXML);
                 resultados = xml.obtenerInfo();
                 tituloCancion =(String) resultados.get(0);
@@ -82,8 +83,11 @@ MensajesController mensajes = new MensajesController();
                 if (AppController.getCheckboxMensajes()[4]){
                     estadoString = estadoString.concat(" ").concat(mensajeFinal);
                 }
+                if (!estadoString.equalsIgnoreCase(TwitterController.obtenerUltimoEstado())){
+                    TwitterController.guardarUltimoEstado(estadoString);
                 StatusUpdate actualizacionEstado = new StatusUpdate(estadoString); 
                twitter.actualizarEstado(actualizacionEstado);
+                }
                if (AppController.getRetraso("minutos") !=0 | AppController.getRetraso("segundos") != 0){
                    tiempoParado = (AppController.getRetraso("minutos") *60) + AppController.getRetraso("segundos");
                     try {
