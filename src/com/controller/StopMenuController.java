@@ -18,7 +18,7 @@ public class StopMenuController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         AppController app = new AppController();
-        app.guardarEstado(false);
+        AppController.guardarEstado(false);
         Main.getTrayIcon().displayMessage("Info", "El programa se ha parado", TrayIcon.MessageType.INFO);
     }
     

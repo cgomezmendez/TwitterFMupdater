@@ -45,6 +45,8 @@ public class Twitter implements Serializable {
     private String usuario;
     @Column(name = "password")
     private String password;
+    @Column(name = "ultimoTweet")
+    private String ultimoTweet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "twitterid")
     private Collection<App> appCollection;
     @JoinColumn(name = "Mensajes_id", referencedColumnName = "id")
@@ -122,6 +124,14 @@ public class Twitter implements Serializable {
     @Override
     public String toString() {
         return "entity.Twitter[ id=" + id + " ]";
+    }
+
+    public String getUltimoTweet() {
+        return ultimoTweet;
+    }
+
+    public void setUltimoTweet(String ultimoTweet) {
+        this.ultimoTweet = ultimoTweet;
     }
     
 }

@@ -4,6 +4,7 @@
  */
 package com.controller;
 
+import com.model.TarjetaRedModel;
 import entity.App;
 import entity.Mensajes;
 import entity.Twitter;
@@ -17,21 +18,21 @@ import javax.persistence.EntityManager;
  * @author cgomezmendez
  */
 public class AppController implements EntidadInterfaceController{
-EntityManager manejadorEntidades = getMANEJADORENTIDADES();
+static EntityManager manejadorEntidades = getMANEJADORENTIDADES();
     public static EntityManager getMANEJADORENTIDADES() {
         return MANEJADORENTIDADES;
     }
 
-    @Override
-    public void guardarEnDataBase(List<String> entrada) {
+
+    public static void guardarEnDataBase(List<String> entrada) {
         App app = manejadorEntidades.find(App.class, 1);
         manejadorEntidades.getTransaction().begin();
         app.setXmlLocation(entrada.get(0));
         manejadorEntidades.getTransaction().commit();
     }
 
-    @Override
-    public List<String> obtenerDesdeBD() {
+
+    public static List<String> obtenerDesdeBD() {
         App app = MANEJADORENTIDADES.find(App.class,1);
         List<String> datos = new ArrayList<>();
         String lugarArchivoXml = app.getXmlLocation();
@@ -41,33 +42,33 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         return datos;
     }
     
-    public void guardarEstado(boolean estado){
+    public static void guardarEstado(boolean estado){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         MANEJADORENTIDADES.getTransaction().begin();
         app.setActivo(estado);
         MANEJADORENTIDADES.getTransaction().commit();
     }
     
-    public boolean retornarEstado(){
+    public static boolean retornarEstado(){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         boolean activo = app.getActivo().booleanValue();
         return activo;
         
     }
     
-    public boolean retornaPrimeraVez(){
+    public static boolean retornaPrimeraVez(){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         return app.getEjecutado();
     }
     
-    public void guardarPrimeraVez(){
+    public static void guardarPrimeraVez(){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         MANEJADORENTIDADES.getTransaction().begin();
         app.setEjecutado(Boolean.TRUE);
         MANEJADORENTIDADES.getTransaction().commit();
     }
     
-    public void crearAPP(){
+    public static void crearAPP(){
         MANEJADORENTIDADES.getTransaction().begin();
         Mensajes mensajes = new Mensajes(1);
         Twitter twitter = new Twitter(1);
@@ -90,10 +91,11 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         twitter.setPassword(null);
         twitter.setPassword(null);
         app.setXmlLocation("C:".concat(File.pathSeparator).concat("Jazler RadioStar 2").concat(File.pathSeparator).concat("Exports"));
+        twitter.setUltimoTweet("s");
         MANEJADORENTIDADES.getTransaction().commit();
     }
     
-    public void guardarRetraso(int minutos,int segundos){
+    public static void guardarRetraso(int minutos,int segundos){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         MANEJADORENTIDADES.getTransaction().begin();
         app.setMinutosRetraso(minutos);
@@ -101,7 +103,7 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         MANEJADORENTIDADES.getTransaction().commit();
     }
     
-    public int getRetraso(String tipo){
+    public static int getRetraso(String tipo){
         App app = MANEJADORENTIDADES.find(App.class, 1);
         if (tipo.equals("minutos")){
             return app.getMinutosRetraso();
@@ -140,5 +142,10 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
             return "no";
         }
         return app.getIdMaquina();
+    }
+    
+    public static String getRutaArchivo(){
+        App app = MANEJADORENTIDADES.find(App.class, 1);
+        return app.getXmlLocation();
     }
 }

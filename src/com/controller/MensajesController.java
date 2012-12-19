@@ -20,7 +20,7 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         return MANEJADORENTIDADES;
     }
 
-    @Override
+
     public void guardarEnDataBase(List<String> entrada) {
         Mensajes mensajes = manejadorEntidades.find(Mensajes.class, 1);
         
@@ -36,7 +36,7 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         
     }
     
-    @Override
+
     public List<String> obtenerDesdeBD(){
         Mensajes mensajes = manejadorEntidades.find(Mensajes.class, 1);
         String mensajeInicial = mensajes.getMensajeInicial();

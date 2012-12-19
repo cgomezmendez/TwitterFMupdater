@@ -44,22 +44,21 @@ public class Main {
     private static ActualizadorController actualizador;
     private static MainWindowView ventana;
     static  private TrayIcon trayIcon;
-    static private String macAdress = "";
     static private boolean configuracionIsActiva;
     static private TwitterModel twitter;
     public static void main(String... args){
         try {
-            app.retornaPrimeraVez();
+            AppController.retornaPrimeraVez();
         }
         catch (NullPointerException e){
             crearPrograma();
         }
-        if (app.retornaPrimeraVez()==false){
+        if (AppController.retornaPrimeraVez()==false){
             JLabel bienvenida = new JLabel("Bienvenido a TwitterFMUpdater 2.0,presione OK para continuar", new ImageIcon("aveazul.png"), 0);
             JOptionPane ventanita = new JOptionPane();
             ventanita.setSize(400,400);
             JOptionPane.showMessageDialog(ventana, bienvenida, "Bienvenido a TwitterFMUpdater 2.0", JOptionPane.INFORMATION_MESSAGE);
-            app.guardarPrimeraVez();
+            AppController.guardarPrimeraVez();
             
         }
         ventana = new MainWindowView();
@@ -72,7 +71,7 @@ public class Main {
             System.out.println("problema look and feeel");
         }
         PrimerUsoAutentificacionTwitter();
-        new AppController().guardarEstado(true);
+        AppController.guardarEstado(true);
         Thread hiloActualizador = new Thread(actualizador);
         hiloActualizador.start();
         Image icon = Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/images/tray.png"));
@@ -135,13 +134,6 @@ public class Main {
         Main.app = app;
     }
 
-    public static String getMacAdress() {
-        return macAdress;
-    }
-
-    public static void setMacAdress(String macAdress) {
-        Main.macAdress = macAdress;
-    }
 
     public static boolean isConfiguracionIsActiva() {
         return configuracionIsActiva;
@@ -164,7 +156,7 @@ public class Main {
             }
             }
  
-            app.crearAPP();
+            AppController.crearAPP();
 
     }
     public static void PrimerUsoAutentificacionTwitter(){

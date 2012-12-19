@@ -47,21 +47,19 @@ public class TwitterModel {
         datos.add(0,peticionToken.getToken());
         datos.add(1,peticionToken.getTokenSecret());
         TwitterController controlador = new TwitterController();
-        controlador.guardarEnDataBase(datos);
+        TwitterController.guardarEnDataBase(datos);
         autentificado = true;
-        System.out.println("coño");
         }
         
         else {
             TwitterController controlador = new TwitterController();
             ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthAccessToken(controlador.obtenerDesdeBD().get(0))
-                .setOAuthAccessTokenSecret(controlador.obtenerDesdeBD().get(1))
+                .setOAuthAccessToken(TwitterController.obtenerDesdeBD().get(0))
+                .setOAuthAccessTokenSecret(TwitterController.obtenerDesdeBD().get(1))
                 .setOAuthConsumerKey("WHvCEQEbaBDcOKpX6itoIw")
                 .setOAuthConsumerSecret("sKMsMQs43H3vFL6V6fKxRvcL8u52EeJj2wiiBAcJSG0");
                 twitter = new TwitterFactory(cb.build()).getInstance();
-                System.out.println(controlador.obtenerDesdeBD().get(0)+"aqui");
                 
         }
         
@@ -70,6 +68,7 @@ public class TwitterModel {
     public void actualizarEstado(StatusUpdate ultimoEstado ){
         try {
             twitter.updateStatus(ultimoEstado);
+            TwitterController.guardarUltimoEstado(ultimoEstado.getStatus());
         } catch (TwitterException ex) {
             Logger.getLogger(TwitterModel.class.getName()).log(Level.SEVERE, null, ex);
         }

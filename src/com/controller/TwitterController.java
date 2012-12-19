@@ -14,8 +14,7 @@ import java.util.List;
  */
 public class TwitterController implements EntidadInterfaceController{
 
-    @Override
-    public void guardarEnDataBase(List<String> entrada) {
+    public static void guardarEnDataBase(List<String> entrada) {
         Twitter twitter = MANEJADORENTIDADES.find(Twitter.class, 1);
         MANEJADORENTIDADES.getTransaction().begin();
         twitter.setUsuario(entrada.get(0));
@@ -23,12 +22,22 @@ public class TwitterController implements EntidadInterfaceController{
         MANEJADORENTIDADES.getTransaction().commit();
     }
 
-    @Override
-    public List<String> obtenerDesdeBD() {
+    public static List<String> obtenerDesdeBD() {
         Twitter twitter = MANEJADORENTIDADES.find(Twitter.class, 1);
         List<String> datos = new ArrayList<>();
         datos.add(0,twitter.getUsuario());
         datos.add(1,twitter.getPassword());
+        datos.add(2,twitter.getUltimoTweet());
         return datos;
+    }
+    
+    public static void guardarUltimoEstado(String ultimoEstado){
+        Twitter twitter = MANEJADORENTIDADES.find(Twitter.class, 1);
+        twitter.setUltimoTweet(ultimoEstado);
+    }
+    
+    public static String obtenerUltimoEstado(){
+        Twitter twitter = MANEJADORENTIDADES.find(Twitter.class, 1);
+        return twitter.getUltimoTweet();
     }
 }
