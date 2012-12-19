@@ -85,5 +85,10 @@ public class TextModel {
             twitter.actualizarEstado(estado);
             
         }
+        try {
+            lector.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
