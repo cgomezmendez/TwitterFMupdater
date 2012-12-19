@@ -27,8 +27,9 @@ public class TwitterModel {
     public TwitterModel() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthConsumerKey("WHvCEQEbaBDcOKpX6itoIw")
-                .setOAuthConsumerSecret("sKMsMQs43H3vFL6V6fKxRvcL8u52EeJj2wiiBAcJSG0");
+                .setOAuthConsumerKey("QF1MyYWBYcViM1fZNVNqPQ")
+                .setOAuthConsumerSecret("sUDJeFWlEPnqXaiBA1x4rZyaUdJ267aw8FLW3qXYe7g");
+
         twitter = new TwitterFactory(cb.build()).getInstance();
         try {
             peticionToken = twitter.getOAuthRequestToken();

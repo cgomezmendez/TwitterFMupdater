@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import twitter4j.StatusUpdate;
 
 /**
  *
@@ -51,7 +52,7 @@ public class TextModel {
         }
         return info;
     }
-    public static String getPromo(){
+    public static void postearPromo(TwitterModel twitter){
         String promo = "";
         DateFormat formatoFecha = new SimpleDateFormat("yy-MM-dd");
         DateFormat formatoHora = new SimpleDateFormat("HH:mm");
@@ -70,15 +71,13 @@ public class TextModel {
             while ((str = lector.readLine())!=null){
                 promo = str;
             }
-            System.out.println(promo);
         } catch (IOException ex) {
             Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (promo.subSequence(0, 5).equals(formatoHora.format(fecha))){
-            System.out.println("se postea");
-            return promo.subSequence(9, promo.length()).toString();
+            String twit = promo.subSequence(9, promo.length()).toString();
+            twitter.actualizarEstado(new StatusUpdate(twit));
         }
-        return null;
     }
 }

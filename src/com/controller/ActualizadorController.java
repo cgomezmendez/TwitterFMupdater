@@ -11,7 +11,6 @@ import com.model.XmlModel;
 import java.awt.TrayIcon;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import twitter4j.StatusUpdate;
@@ -26,7 +25,7 @@ private int tiempoParado;
 private int segundos;
 private int minutos;
 private TwitterModel twitter;
-private XmlModel xml = null;
+private XmlModel xml;
 MensajesController mensajes = new MensajesController();
     public static boolean isCorrer() {
         return correr;
@@ -51,17 +50,16 @@ MensajesController mensajes = new MensajesController();
                 String tituloCancion = "";
                 String nombreArtista = "";
                 if (AppController.getRutaArchivo().contains("xml")){
-                    if (xml==null){
+                TextModel.postearPromo(twitter);
                 xml = new XmlModel(rutaXML);
-                    }
                 resultados = xml.obtenerInfo();
                 tituloCancion =(String) resultados.get(0);
                 nombreArtista =(String) resultados.get(1);
                 }
                 if (AppController.getRutaArchivo().contains("txt")){
-                    nombreArtista = TextModel.getInfoCancion()[0];
+                    tituloCancion = TextModel.getInfoCancion()[0];
                     if (TextModel.getInfoCancion().length==2){
-                    tituloCancion = TextModel.getInfoCancion()[1];
+                    nombreArtista = TextModel.getInfoCancion()[1];
                     }
                 }
                 List<String> mensajesObtenidos = mensajes.obtenerDesdeBD();
@@ -89,7 +87,7 @@ MensajesController mensajes = new MensajesController();
                if (AppController.getRetraso("minutos") !=0 | AppController.getRetraso("segundos") != 0){
                    tiempoParado = (AppController.getRetraso("minutos") *60) + AppController.getRetraso("segundos");
                     try {
-                        this.sleep(TimeUnit.MILLISECONDS.convert(tiempoParado, TimeUnit.SECONDS));
+                        this.sleep(tiempoParado*1000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ActualizadorController.class.getName()).log(Level.SEVERE, null, ex);
                     }
