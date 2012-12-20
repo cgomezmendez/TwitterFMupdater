@@ -11,6 +11,7 @@ import com.model.XmlModel;
 import java.awt.TrayIcon;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import twitter4j.StatusUpdate;
@@ -25,7 +26,7 @@ private int tiempoParado;
 private int segundos;
 private int minutos;
 private TwitterModel twitter;
-private XmlModel xml;
+private XmlModel xml = null;
 MensajesController mensajes = new MensajesController();
     public static boolean isCorrer() {
         return correr;
@@ -48,19 +49,23 @@ MensajesController mensajes = new MensajesController();
                 String rutaXML = AppController.obtenerDesdeBD().get(0);
                 String tituloCancion = "";
                 String nombreArtista = "";
+                String promo = TextModel.getPromo(twitter);
+                 if (promo!=null && TwitterController.obtenerUltimoEstado().equalsIgnoreCase(promo)){
+                     TwitterController.guardarUltimoEstado(promo);
+                 twitter.actualizarEstado(new StatusUpdate(promo));
+                 promo = null;
+                  continue;
+                }
                 if (AppController.getRutaArchivo().contains("xml")){
-                    if (AppController.getMiscelaneasCheckBox()){
-                TextModel.postearPromo(twitter);
-                    }
                 xml = new XmlModel(rutaXML);
                 resultados = xml.obtenerInfo();
                 tituloCancion =(String) resultados.get(0);
                 nombreArtista =(String) resultados.get(1);
                 }
                 if (AppController.getRutaArchivo().contains("txt")){
-                    tituloCancion = TextModel.getInfoCancion()[0];
+                    nombreArtista = TextModel.getInfoCancion()[0];
                     if (TextModel.getInfoCancion().length==2){
-                    nombreArtista = TextModel.getInfoCancion()[1];
+                    tituloCancion = TextModel.getInfoCancion()[1];
                     }
                 }
                 List<String> mensajesObtenidos = mensajes.obtenerDesdeBD();
@@ -83,15 +88,17 @@ MensajesController mensajes = new MensajesController();
                 if (AppController.getCheckboxMensajes()[4]){
                     estadoString = estadoString.concat(" ").concat(mensajeFinal);
                 }
+                if (!estadoString.equalsIgnoreCase(mensajeAntesCancion.concat("".concat(mensajeFinal)))){
                 if (!estadoString.equalsIgnoreCase(TwitterController.obtenerUltimoEstado())){
                     TwitterController.guardarUltimoEstado(estadoString);
                 StatusUpdate actualizacionEstado = new StatusUpdate(estadoString); 
                twitter.actualizarEstado(actualizacionEstado);
                 }
+                }
                if (AppController.getRetraso("minutos") !=0 | AppController.getRetraso("segundos") != 0){
                    tiempoParado = (AppController.getRetraso("minutos") *60) + AppController.getRetraso("segundos");
                     try {
-                        this.sleep(tiempoParado*1000);
+                        this.sleep(TimeUnit.MILLISECONDS.convert(tiempoParado, TimeUnit.SECONDS));
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ActualizadorController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -103,6 +110,7 @@ MensajesController mensajes = new MensajesController();
                if (presentado & Main.getVentana().isVisible()){
                    presentado = false;
                }
+               xml = null;
             }
         }
     }

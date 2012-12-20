@@ -55,7 +55,7 @@ public class TextModel {
         }
         return info;
     }
-    public static void postearPromo(TwitterModel twitter){
+    public static String getPromo(TwitterModel twitter){
         String promo = "";
         DateFormat formatoFecha = new SimpleDateFormat("yy-MM-dd");
         DateFormat formatoHora = new SimpleDateFormat("HH:mm");
@@ -73,6 +73,7 @@ public class TextModel {
             while ((str = lector.readLine())!=null){
                 promo = str;
             }
+
         } catch (IOException ex) {
             Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -81,8 +82,7 @@ public class TextModel {
             String regex = "";
             jingle = jingle.replace(" ( JINGLE )", "");
             jingle = jingle.replace(" - ","");
-            StatusUpdate estado = new StatusUpdate(jingle);
-            twitter.actualizarEstado(estado);
+            return jingle;
             
         }
         try {
@@ -90,5 +90,6 @@ public class TextModel {
         } catch (IOException ex) {
             Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 }

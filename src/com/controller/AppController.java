@@ -4,7 +4,6 @@
  */
 package com.controller;
 
-import com.model.TarjetaRedModel;
 import entity.App;
 import entity.Mensajes;
 import entity.Twitter;
@@ -91,7 +90,7 @@ static EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         mensajes.setMensajeFinal("");
         twitter.setPassword(null);
         twitter.setPassword(null);
-        app.setXmlLocation("C:".concat(File.pathSeparator).concat("Jazler RadioStar 2").concat(File.pathSeparator).concat("Exports"));
+        app.setXmlLocation("C:\\".concat(File.pathSeparator).concat("Jazler RadioStar 2").concat(File.pathSeparator).concat("Exports"));
         twitter.setUltimoTweet("s");
         MANEJADORENTIDADES.getTransaction().commit();
     }
