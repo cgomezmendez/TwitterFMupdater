@@ -8,10 +8,8 @@ import com.controller.CloseMenuController;
 import com.controller.StartMenuController;
 import com.controller.StopMenuController;
 import com.controller.TrayIconController;
-import com.controller.TwitterPrimeraConfController;
 import com.model.TwitterModel;
 import com.view.MainWindowView;
-import com.view.PrimeraConfiguracionView;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -19,7 +17,6 @@ import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -160,26 +157,7 @@ public class Main {
 
     }
     public static void PrimerUsoAutentificacionTwitter(){
-                TwitterPrimeraConfController controladorVentanaAutentificacion = new TwitterPrimeraConfController();
-        PrimeraConfiguracionView ventanaAutentificacion = new PrimeraConfiguracionView();
-        controladorVentanaAutentificacion.setVentana(ventanaAutentificacion);
-        ventanaAutentificacion.getGuardarTwitterPrimeraConf().addActionListener(controladorVentanaAutentificacion);
         twitter = new TwitterModel();
-        controladorVentanaAutentificacion.setTwitter(twitter);
-        try {
-            ventanaAutentificacion.getNavegador().setPage(twitter.getPeticionToken().getAuthenticationURL());
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ventanaAutentificacion.setVisible(true);
-        int i;
-        while (twitter.isAutentificado()==false){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
         actualizador = new ActualizadorController(twitter);
     }
 }

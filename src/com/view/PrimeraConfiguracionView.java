@@ -4,7 +4,6 @@
  */
 package com.view;
 
-import com.controller.TwitterPrimeraConfController;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;

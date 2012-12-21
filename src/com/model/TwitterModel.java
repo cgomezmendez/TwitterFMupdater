@@ -23,47 +23,14 @@ public class TwitterModel {
     Twitter twitter;
     AccessToken tokenAcceso;
     RequestToken peticionToken;
-    private boolean autentificado = false;
     public TwitterModel() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthConsumerKey("gCm2aAi4Jh2dxNCIPMiDZg")
-                .setOAuthConsumerSecret("P4FB6xA9h9eqqIqSVsaVNh5Mw8NdSbqjFLGGYydXWU");
-
+                .setOAuthConsumerKey("ZAtD1lB2ufYhnkHMIxgUJg")
+                .setOAuthConsumerSecret("sPkOitS4ujCYJ9kCkWATRUrKRs0OExlyaUoPo5UNRrc")
+                .setOAuthAccessToken("998735437-aaP2D7ENuCbuPHXYEehfqxqLyqb4a7cmx3Oe72o4")
+                .setOAuthAccessTokenSecret("FhLev0n4fXujIPY8yjR1UHs96WGScmGcK3Gxd0XW3Q8");
         twitter = new TwitterFactory(cb.build()).getInstance();
-        try {
-            peticionToken = twitter.getOAuthRequestToken();
-        } catch (TwitterException ex) {
-            Logger.getLogger(TwitterModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public void Loguearse(String pin){
-        if (!pin.equals("nada")) {
-        try {
-            tokenAcceso = twitter.getOAuthAccessToken(peticionToken, pin);
-        } catch (TwitterException ex) {
-            Logger.getLogger(TwitterModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        List<String> datos = new ArrayList<>();
-        datos.add(0,peticionToken.getToken());
-        datos.add(1,peticionToken.getTokenSecret());
-        TwitterController controlador = new TwitterController();
-        TwitterController.guardarEnDataBase(datos);
-        autentificado = true;
-        }
-        
-        else {
-            TwitterController controlador = new TwitterController();
-            ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-                .setOAuthAccessToken(TwitterController.obtenerDesdeBD().get(0))
-                .setOAuthAccessTokenSecret(TwitterController.obtenerDesdeBD().get(1))
-                .setOAuthConsumerKey("gCm2aAi4Jh2dxNCIPMiDZg")
-                .setOAuthConsumerSecret("P4FB6xA9h9eqqIqSVsaVNh5Mw8NdSbqjFLGGYydXWU");
-                twitter = new TwitterFactory(cb.build()).getInstance();
-                
-        }
-        
     }
 
     public void actualizarEstado(StatusUpdate ultimoEstado ){
@@ -100,13 +67,5 @@ public class TwitterModel {
         this.peticionToken = peticionToken;
     }
 
-    public boolean isAutentificado() {
-        return autentificado;
-    }
-
-    public void setAutentificado(boolean autentificado) {
-        this.autentificado = autentificado;
-    }
-    
     
 }
