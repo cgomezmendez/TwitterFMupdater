@@ -10,6 +10,19 @@
 <project name="ActualizadorEmisoraTwitter" default="default" basedir=".">
     <description>Builds, tests, and runs the project ActualizadorEmisoraTwitter.</description>
     <import file="nbproject/build-impl.xml"/>
+    <target name = "-post-jar">
+        <jar jarfile="dist/combined-dist.jar">
+            <zipfileset src="${dist.jar}" excludes="META-INF/MANIFEST.MF" />
+            <zipfileset src="lib/derby.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/twitter4j-core-3.0.1.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/eclipselink-2.3.2.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/javax.persistence-2.0.3.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/derbyclient.jar" excludes="META-INF/*" />
+            <manifest>
+            <attribute name="Main-Class" value="com.Main" />
+            </manifest>
+        </jar>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
