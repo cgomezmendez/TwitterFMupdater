@@ -35,7 +35,7 @@ public class XmlModel implements ImprimibleModel{
         try {
             archivoXML = new FileReader(nombreArchivo);
         } catch (FileNotFoundException ex) {
-           System.err.println("el archivo no existe");
+           return null;
         }
  
      try {lector = XMLReaderFactory.createXMLReader();

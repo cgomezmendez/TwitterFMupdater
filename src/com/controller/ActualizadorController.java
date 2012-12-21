@@ -49,16 +49,23 @@ MensajesController mensajes = new MensajesController();
                 String rutaXML = AppController.obtenerDesdeBD().get(0);
                 String tituloCancion = "";
                 String nombreArtista = "";
-                String promo = TextModel.getPromo(twitter);
-                 if (promo!=null && TwitterController.obtenerUltimoEstado().equalsIgnoreCase(promo)){
-                     TwitterController.guardarUltimoEstado(promo);
-                 twitter.actualizarEstado(new StatusUpdate(promo));
-                 promo = null;
-                  continue;
-                }
                 if (AppController.getRutaArchivo().contains("xml")){
+                                    if (AppController.getMiscelaneasCheckBox()){
+                    if (TextModel.getPromo(twitter)){
+                                            try {
+                                                this.sleep(5000);
+                                            } catch (InterruptedException ex) {
+                                                Logger.getLogger(ActualizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                        continue;
+                    }
+                }
                 xml = new XmlModel(rutaXML);
                 resultados = xml.obtenerInfo();
+                if (resultados==null){
+                    continue;
+                }
+                
                 tituloCancion =(String) resultados.get(0);
                 nombreArtista =(String) resultados.get(1);
                 }

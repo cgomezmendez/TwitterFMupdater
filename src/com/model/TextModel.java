@@ -28,6 +28,8 @@ public class TextModel {
     static String tituloYArtista;
     static File archivo;
     static String[] arregloTituloYArtista = new String[2];
+    static String anuncio;
+    static String promoSonada = "klk";
     public static String[] getInfoCancion(){
         String[] info = new String[2];
         archivo = new File(AppController.getRutaArchivo());
@@ -55,7 +57,7 @@ public class TextModel {
         }
         return info;
     }
-    public static String getPromo(TwitterModel twitter){
+    public static boolean getPromo(TwitterModel twitter){
         String promo = "";
         DateFormat formatoFecha = new SimpleDateFormat("yy-MM-dd");
         DateFormat formatoHora = new SimpleDateFormat("HH:mm");
@@ -82,14 +84,13 @@ public class TextModel {
             String regex = "";
             jingle = jingle.replace(" ( JINGLE )", "");
             jingle = jingle.replace(" - ","");
-            return jingle;
-            
+            if (!promoSonada.equals(jingle)){
+            promoSonada = jingle;
+            twitter.actualizarEstado(new StatusUpdate(jingle));
+            return true;
+            }
+                      
         }
-        try {
-            lector.close();
-        } catch (IOException ex) {
-            Logger.getLogger(TextModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return false;
     }
 }

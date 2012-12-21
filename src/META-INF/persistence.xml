@@ -5,8 +5,9 @@
     <class>entity.Twitter</class>
     <class>entity.App</class>
     <class>entity.Mensajes</class>
+    <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby:twitterfmupdaterlocal;create=true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby:twitterfmupdaterloca;create=true"/>
       <property name="javax.persistence.jdbc.password" value="elcj2304"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
       <property name="javax.persistence.jdbc.user" value="thecj"/>
