@@ -15,13 +15,13 @@ import javax.persistence.EntityManager;
  * @author cgomezmendez
  */
 public class MensajesController implements EntidadInterfaceController{
-EntityManager manejadorEntidades = getMANEJADORENTIDADES();
+static EntityManager manejadorEntidades = getMANEJADORENTIDADES();
     public static EntityManager getMANEJADORENTIDADES() {
         return MANEJADORENTIDADES;
     }
 
 
-    public void guardarEnDataBase(List<String> entrada) {
+    public static void guardarEnDataBase(List<String> entrada) {
         Mensajes mensajes = manejadorEntidades.find(Mensajes.class, 1);
         
         manejadorEntidades.getTransaction().begin();
@@ -37,7 +37,7 @@ EntityManager manejadorEntidades = getMANEJADORENTIDADES();
     }
     
 
-    public List<String> obtenerDesdeBD(){
+    public static List<String> obtenerDesdeBD(){
         Mensajes mensajes = manejadorEntidades.find(Mensajes.class, 1);
         String mensajeInicial = mensajes.getMensajeInicial();
         String mensajeArtista = mensajes.getMensajeArtista();

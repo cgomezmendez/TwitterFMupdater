@@ -9,6 +9,7 @@ import com.controller.DetenerController;
 import com.controller.GuardarMensajesController;
 import com.controller.IniciarController;
 import com.controller.MensajeRapidoController;
+import com.controller.MensajesController;
 import com.controller.MiscelaneasController;
 import com.controller.SeleccionarArchivoController;
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
@@ -122,10 +124,10 @@ public class MainWindowView extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        fieldMensajeAntesCancion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        fieldMensajeFinal = new javax.swing.JTextField();
+        fieldMensajeArtista = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -279,7 +281,7 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                 .addGap(141, 141, 141))
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,17 +299,17 @@ public class MainWindowView extends javax.swing.JFrame {
 
         jLabel3.setText("Mensaje final");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        fieldMensajeAntesCancion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                fieldMensajeAntesCancionActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Mensaje antes de artista");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        fieldMensajeFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                fieldMensajeFinalActionPerformed(evt);
             }
         });
 
@@ -398,7 +400,7 @@ public class MainWindowView extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addGap(108, 108, 108)
-                                    .addComponent(jTextField1))
+                                    .addComponent(fieldMensajeFinal))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel2)
@@ -406,8 +408,8 @@ public class MainWindowView extends javax.swing.JFrame {
                                         .addComponent(jLabel4))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(fieldMensajeArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(fieldMensajeAntesCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(preCancionCheckBox)
@@ -415,7 +417,7 @@ public class MainWindowView extends javax.swing.JFrame {
                             .addComponent(cancionCheckBox)
                             .addComponent(ArtistaCheckBox)
                             .addComponent(FinalCheckBox))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,7 +437,7 @@ public class MainWindowView extends javax.swing.JFrame {
                             .addComponent(jLabel14))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldMensajeAntesCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(preCancionCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -445,7 +447,7 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldMensajeArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(preArtistaCheckBox))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -454,13 +456,16 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldMensajeFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FinalCheckBox))
                 .addGap(34, 34, 34)
                 .addComponent(jButton2)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
+        fieldMensajeAntesCancion.setText(MensajesController.obtenerDesdeBD().get(0));
+        fieldMensajeFinal.setText(MensajesController.obtenerDesdeBD().get(2));
+        fieldMensajeArtista.setText(MensajesController.obtenerDesdeBD().get(1));
         jButton2.addActionListener(new GuardarMensajesController());
 
         jTabbedPane2.addTab("Mensajes", jPanel4);
@@ -490,7 +495,7 @@ public class MainWindowView extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+                .addContainerGap(146, Short.MAX_VALUE)
                 .addComponent(labelMensajeRapido, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -516,7 +521,7 @@ public class MainWindowView extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+                .addContainerGap(355, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addComponent(labelMiscelaneas)
@@ -537,10 +542,10 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addComponent(checkBoxJingles)
                 .addGap(18, 18, 18)
                 .addComponent(aceptarBotonMiscelaneas)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(404, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("MIscelaneas", jPanel8);
+        jTabbedPane2.addTab("Miscelaneas", jPanel8);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/view/copyright.gif"))); // NOI18N
         jLabel7.setText("<html><center><h1>&copy;Cristian Gomez 2012 todos los derechos reservados</h1></center></html>");
@@ -559,7 +564,7 @@ public class MainWindowView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(206, 206, 206)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Acerca", jPanel2);
@@ -586,13 +591,13 @@ public class MainWindowView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void fieldMensajeFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldMensajeFinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_fieldMensajeFinalActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void fieldMensajeAntesCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldMensajeAntesCancionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_fieldMensajeAntesCancionActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -639,6 +644,9 @@ public class MainWindowView extends javax.swing.JFrame {
     private javax.swing.JButton aceptarBotonMiscelaneas;
     private javax.swing.JCheckBox cancionCheckBox;
     private javax.swing.JCheckBox checkBoxJingles;
+    private javax.swing.JTextField fieldMensajeAntesCancion;
+    private javax.swing.JTextField fieldMensajeArtista;
+    private javax.swing.JTextField fieldMensajeFinal;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -669,9 +677,6 @@ public class MainWindowView extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel labelMensajeRapido;
     private javax.swing.JLabel labelMiscelaneas;
     private javax.swing.JCheckBox preArtistaCheckBox;
@@ -902,29 +907,31 @@ public class MainWindowView extends javax.swing.JFrame {
         this.jTabbedPane2 = jTabbedPane2;
     }
 
-    public javax.swing.JTextField getjTextField1() {
-        return jTextField1;
+    public JTextField getFieldMensajeAntesCancion() {
+        return fieldMensajeAntesCancion;
     }
 
-    public void setjTextField1(javax.swing.JTextField jTextField1) {
-        this.jTextField1 = jTextField1;
+    public void setFieldMensajeAntesCancion(JTextField fieldMensajeAntesCancion) {
+        this.fieldMensajeAntesCancion = fieldMensajeAntesCancion;
     }
 
-    public javax.swing.JTextField getjTextField2() {
-        return jTextField2;
+    public JTextField getFieldMensajeArtista() {
+        return fieldMensajeArtista;
     }
 
-    public void setjTextField2(javax.swing.JTextField jTextField2) {
-        this.jTextField2 = jTextField2;
+    public void setFieldMensajeArtista(JTextField fieldMensajeArtista) {
+        this.fieldMensajeArtista = fieldMensajeArtista;
     }
 
-    public javax.swing.JTextField getjTextField3() {
-        return jTextField3;
+    public JTextField getFieldMensajeFinal() {
+        return fieldMensajeFinal;
     }
 
-    public void setjTextField3(javax.swing.JTextField jTextField3) {
-        this.jTextField3 = jTextField3;
+    public void setFieldMensajeFinal(JTextField fieldMensajeFinal) {
+        this.fieldMensajeFinal = fieldMensajeFinal;
     }
+
+
 
     public javax.swing.JSpinner getSpinerMinutos() {
         return spinerMinutos;

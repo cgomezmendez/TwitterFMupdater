@@ -46,7 +46,7 @@ MensajesController mensajes = new MensajesController();
         while (true){
             if (AppController.retornarEstado()){
                 ArrayList resultados;
-                String rutaXML = AppController.obtenerDesdeBD().get(0);
+                String rutaXML = AppController.getRutaArchivo();
                 String tituloCancion = "";
                 String nombreArtista = "";
                 if (AppController.getRutaArchivo().contains("xml")){
@@ -75,9 +75,9 @@ MensajesController mensajes = new MensajesController();
                     tituloCancion = TextModel.getInfoCancion()[1];
                     }
                 }
-                List<String> mensajesObtenidos = mensajes.obtenerDesdeBD();
-                String mensajeAntesCancion = mensajesObtenidos.get(1);
-                String mensajeAntesArtista = mensajesObtenidos.get(0);
+                List<String> mensajesObtenidos = MensajesController.obtenerDesdeBD();
+                String mensajeAntesCancion = mensajesObtenidos.get(0);
+                String mensajeAntesArtista = mensajesObtenidos.get(1);
                 String mensajeFinal = mensajesObtenidos.get(2);
                 String estadoString = "";
                 if (AppController.getCheckboxMensajes()[0]){

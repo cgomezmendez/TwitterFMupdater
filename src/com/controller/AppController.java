@@ -87,10 +87,10 @@ static EntityManager manejadorEntidades = getMANEJADORENTIDADES();
         app.setJingles(Boolean.FALSE);
         mensajes.setMensajeInicial("ahora suena: ");
         mensajes.setMensajeArtista("");
-        mensajes.setMensajeFinal("");
+        mensajes.setMensajeFinal("Por DobleClickSolutions.com");
         twitter.setPassword(null);
         twitter.setPassword(null);
-        app.setXmlLocation("C:\\".concat(File.pathSeparator).concat("Jazler RadioStar 2").concat(File.pathSeparator).concat("Exports"));
+        app.setXmlLocation("C:\\".concat(File.separator).concat("Jazler RadioStar 2").concat(File.separator).concat("Exports").concat(File.separator.concat("NowOnAir.xml")));
         twitter.setUltimoTweet("s");
         MANEJADORENTIDADES.getTransaction().commit();
     }

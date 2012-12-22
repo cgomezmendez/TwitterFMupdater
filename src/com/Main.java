@@ -141,23 +141,13 @@ public class Main {
     }
     
     public static void crearPrograma(){
-            boolean licenciaIsValida = false;
-            String licencia;
-            while (!licenciaIsValida){
-            licencia = JOptionPane.showInputDialog(null,"Introduzca Su Numero De Licencia","TwitterFMUpdater 2.0",JOptionPane.QUESTION_MESSAGE);
-            if (licencia.equals("UM3S5Y-PD530-RS04E-EY3DH")){
-                licenciaIsValida = true;
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Licencia invalida","TwitterFMUpdater 2.0",JOptionPane.ERROR_MESSAGE);
-            }
-            }
- 
+
             AppController.crearAPP();
 
     }
     public static void PrimerUsoAutentificacionTwitter(){
         twitter = new TwitterModel();
         actualizador = new ActualizadorController(twitter);
+        AppController.guardarEstado(true);
     }
 }
